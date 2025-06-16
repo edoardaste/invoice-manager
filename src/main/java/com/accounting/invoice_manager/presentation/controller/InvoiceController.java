@@ -23,6 +23,7 @@ public class InvoiceController {
     public ResponseEntity<List<InvoiceModel>> getByUserId(@PathVariable(required = true, value = "id") UUID id){
         List<InvoiceModel> invoiceReturn = invoiceServices.findByUserId(id);
         if(invoiceReturn.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(invoiceReturn);
     }
